@@ -1,7 +1,9 @@
+import Field from './Field';
+
 const SearchTaskForm = () => {
   return (
     <form className="todo__form">
-      <div className="todo__field field">
+      {/* <div className="todo__field field">
         <label className="field__label" htmlFor="search-task">
           Search task
         </label>
@@ -12,7 +14,13 @@ const SearchTaskForm = () => {
           autoComplete="off"
           type="search"
         />
-      </div>
+      </div> */}
+      <Field
+        className="todo__field"
+        label="Search task"
+        id="search-task"
+        type="search"
+      />
     </form>
   );
 };

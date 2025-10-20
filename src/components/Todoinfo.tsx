@@ -1,10 +1,11 @@
 interface TodoInfoProps {
   total: number;
   done: number;
+  onDeleteAllButtonClick: () => void;
 }
 
 const Todoinfo = (props: TodoInfoProps) => {
-  const { total, done } = props;
+  const { total, done, onDeleteAllButtonClick } = props;
 
   const hasTasks: boolean = total > 0;
 
@@ -14,7 +15,11 @@ const Todoinfo = (props: TodoInfoProps) => {
         Done {done} from {total}
       </div>
       {hasTasks && (
-        <button className="todo__delete-all-button" type="button">
+        <button
+          className="todo__delete-all-button"
+          type="button"
+          onClick={onDeleteAllButtonClick}
+        >
           Delete all
         </button>
       )}

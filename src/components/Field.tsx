@@ -3,10 +3,11 @@ interface FieldProps {
   id?: string;
   label?: string;
   type?: string;
+  onSearchInput?: (query: string) => void;
 }
 
 const Field: React.FC<FieldProps> = (props) => {
-  const { className = '', id, label, type = 'text' } = props;
+  const { className = '', id, label, type = 'text', onSearchInput } = props;
 
   return (
     <div className={`field ${className}`}>
@@ -19,6 +20,9 @@ const Field: React.FC<FieldProps> = (props) => {
         type={type}
         placeholder=" "
         autoComplete="off"
+        onInput={(e: React.ChangeEvent<HTMLInputElement>) => {
+          onSearchInput?.(e.target.value);
+        }}
       />
     </div>
   );

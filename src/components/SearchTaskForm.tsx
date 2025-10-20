@@ -1,25 +1,20 @@
 import Field from './Field';
 
-const SearchTaskForm = () => {
+interface SearchTaskFormProps {
+  onSearchInput: (query: string) => void;
+}
+
+const SearchTaskForm: React.FC<SearchTaskFormProps> = (props) => {
+  const { onSearchInput } = props;
+
   return (
-    <form className="todo__form">
-      {/* <div className="todo__field field">
-        <label className="field__label" htmlFor="search-task">
-          Search task
-        </label>
-        <input
-          className="field__input"
-          id="search-task"
-          placeholder=" "
-          autoComplete="off"
-          type="search"
-        />
-      </div> */}
+    <form className="todo__form" onSubmit={(e) => e.preventDefault()}>
       <Field
         className="todo__field"
         label="Search task"
         id="search-task"
         type="search"
+        onSearchInput={onSearchInput}
       />
     </form>
   );

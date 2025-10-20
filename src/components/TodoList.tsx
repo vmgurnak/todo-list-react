@@ -2,10 +2,12 @@ import TodoItem from './TodoItem';
 
 interface TodoListProps {
   tasks: { id: string; title: string; isDone: boolean }[];
+  onDeleteTaskButtonClick: (taskId: string) => void;
+  onTaskCompleteChange: (taskId: string, isDone: boolean) => void;
 }
 
 const TodoList: React.FC<TodoListProps> = (props) => {
-  const { tasks = [] } = props;
+  const { tasks = [], onDeleteTaskButtonClick, onTaskCompleteChange } = props;
 
   const hasTasks: boolean = true;
 
@@ -22,7 +24,13 @@ const TodoList: React.FC<TodoListProps> = (props) => {
         //   title={task.title}
         //   isDone={task.isDone}
         // />
-        <TodoItem className="todo__item" key={task.id} {...task} />
+        <TodoItem
+          className="todo__item"
+          key={task.id}
+          onDeleteTaskButtonClick={onDeleteTaskButtonClick}
+          onTaskCompleteChange={onTaskCompleteChange}
+          {...task}
+        />
       ))}
     </ul>
   );

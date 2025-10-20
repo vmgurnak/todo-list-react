@@ -1,12 +1,21 @@
 interface TodoItemProps {
   className?: string;
-  id?: string;
+  id: string;
   title?: string;
   isDone?: boolean;
+  onDeleteTaskButtonClick: (taskId: string) => void;
+  onTaskCompleteChange: (taskId: string, isDone: boolean) => void;
 }
 
 const TodoItem: React.FC<TodoItemProps> = (props) => {
-  const { className = '', id, title, isDone } = props;
+  const {
+    className = '',
+    id,
+    title,
+    isDone,
+    onDeleteTaskButtonClick,
+    onTaskCompleteChange,
+  } = props;
 
   return (
     <li className={`todo-item ${className}`}>
@@ -15,7 +24,9 @@ const TodoItem: React.FC<TodoItemProps> = (props) => {
         id={id}
         type="checkbox"
         checked={isDone}
-        readOnly
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          onTaskCompleteChange(id, e.target.checked)
+        }
       />
       <label className="todo-item__label" htmlFor={id}>
         {title}
@@ -24,6 +35,8 @@ const TodoItem: React.FC<TodoItemProps> = (props) => {
         className="todo-item__delete-button"
         aria-label="Delete"
         title="Delete"
+        type="button"
+        onClick={() => onDeleteTaskButtonClick(id)}
       >
         <svg
           width="20"

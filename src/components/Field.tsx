@@ -1,28 +1,28 @@
 interface FieldProps {
   className?: string;
-  id?: string;
-  label?: string;
+  id: string;
+  label: string;
   type?: string;
-  onSearchInput?: (query: string) => void;
+  value: string;
+  onInput: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const Field: React.FC<FieldProps> = (props) => {
-  const { className = '', id, label, type = 'text', onSearchInput } = props;
+  const { className = '', id, label, type = 'text', value, onInput } = props;
 
   return (
     <div className={`field ${className}`}>
-      <label className="field__label" htmlFor={id || 'new-task'}>
+      <label className="field__label" htmlFor={id}>
         {label}
       </label>
       <input
         className="field__input"
-        id={id || 'new-task'}
-        type={type}
+        id={id}
         placeholder=" "
         autoComplete="off"
-        onInput={(e: React.ChangeEvent<HTMLInputElement>) => {
-          onSearchInput?.(e.target.value);
-        }}
+        type={type}
+        value={value}
+        onInput={onInput}
       />
     </div>
   );

@@ -1,11 +1,12 @@
 import Field from './Field';
 
 interface SearchTaskFormProps {
-  onSearchInput: (query: string) => void;
+  searchQuery: string;
+  setSearchQuery: (query: string) => void;
 }
 
 const SearchTaskForm: React.FC<SearchTaskFormProps> = (props) => {
-  const { onSearchInput } = props;
+  const { searchQuery, setSearchQuery } = props;
 
   return (
     <form className="todo__form" onSubmit={(e) => e.preventDefault()}>
@@ -14,7 +15,10 @@ const SearchTaskForm: React.FC<SearchTaskFormProps> = (props) => {
         label="Search task"
         id="search-task"
         type="search"
-        onSearchInput={onSearchInput}
+        value={searchQuery}
+        onInput={(event: React.ChangeEvent<HTMLInputElement>) =>
+          setSearchQuery(event.target.value)
+        }
       />
     </form>
   );

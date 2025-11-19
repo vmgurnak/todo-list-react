@@ -9,6 +9,8 @@ interface Task {
 interface TodoListProps {
   tasks: Task[];
   filterdTasks: Task[] | null;
+  firsrIncomleteTaskRef: React.RefObject<HTMLLIElement | null>;
+  firstIncomleteTaskId: string | undefined;
   onDeleteTaskButtonClick: (taskId: string) => void;
   onTaskCompleteChange: (taskId: string, isDone: boolean) => void;
 }
@@ -17,6 +19,8 @@ const TodoList: React.FC<TodoListProps> = (props) => {
   const {
     tasks = [],
     filterdTasks,
+    firsrIncomleteTaskRef,
+    firstIncomleteTaskId,
     onDeleteTaskButtonClick,
     onTaskCompleteChange,
   } = props;
@@ -44,6 +48,9 @@ const TodoList: React.FC<TodoListProps> = (props) => {
         <TodoItem
           className="todo__item"
           key={task.id}
+          itemRef={
+            task.id === firstIncomleteTaskId ? firsrIncomleteTaskRef : null
+          }
           onDeleteTaskButtonClick={onDeleteTaskButtonClick}
           onTaskCompleteChange={onTaskCompleteChange}
           {...task}

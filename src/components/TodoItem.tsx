@@ -3,6 +3,7 @@ interface TodoItemProps {
   id: string;
   title?: string;
   isDone?: boolean;
+  itemRef: React.RefObject<HTMLLIElement | null> | null;
   onDeleteTaskButtonClick: (taskId: string) => void;
   onTaskCompleteChange: (taskId: string, isDone: boolean) => void;
 }
@@ -13,12 +14,13 @@ const TodoItem: React.FC<TodoItemProps> = (props) => {
     id,
     title,
     isDone,
+    itemRef,
     onDeleteTaskButtonClick,
     onTaskCompleteChange,
   } = props;
 
   return (
-    <li className={`todo-item ${className}`}>
+    <li className={`todo-item ${className}`} ref={itemRef}>
       <input
         className="todo-item__checkbox"
         id={id}
